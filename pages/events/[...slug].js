@@ -1,14 +1,14 @@
 
 
-function FilteredEventPage() {
+function FilteredEventsPage() {
     return (
         <>
         <div>
-            <h1>Filtered Event</h1>
+            <h1>Filtered Events</h1>
         </div>
         </>
     )
 }
 
 
-export default FilteredEventPage;
+export default FilteredEventsPage;
