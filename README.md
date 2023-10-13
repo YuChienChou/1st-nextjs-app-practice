@@ -1,6 +1,6 @@
 # My first Next.js App. 
 
-### Single Page Application  | Next.js hooks | Filebased Routing | More HTML tags and React concepts
+### Single Page Application  | Next.js hooks | Filebased Routing | Firebase
 Deployed on Vercel - [Live Link](https://2nd-nextjs-app-practice.vercel.app/events)
 
 ## 
