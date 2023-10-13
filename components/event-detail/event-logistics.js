@@ -4,7 +4,7 @@ import LogisticsItem from './logistics-item';
 import classes from './event-logistics.module.css';
 
 function EventLogistics(props) {
-  console.log('props in event-logistics component: ', props);
+  // console.log('props in event-logistics component: ', props);
   const { date, address, image, imageAlt } = props;
 
   const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
