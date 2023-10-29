@@ -8,14 +8,14 @@ function AllEventsPage() {
     const router = useRouter();
     const events = getAllEvents();
 
-    function findEventsHander(year, month) {
+    function findEventsHandler(year, month) {
         const fullpath = `/events/${year}/${month}`;
         router.push(fullpath);
     }
 
     return (
         <>
-            <EventsSearch onSearch={findEventsHander}/>
+            <EventsSearch onSearch={findEventsHandler}/>
             <EventList items={events} />
         </>
     )
