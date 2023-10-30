@@ -7,6 +7,7 @@ import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
 import ErrorAlert from '../../components/ui/error-alert';
+import { calculateSizeAdjustValues } from 'next/dist/server/font-utils';
 
 
 function EventDetailPage(props) {
@@ -17,10 +18,15 @@ function EventDetailPage(props) {
     const event = props.selectedEvent;
 
     if(!event) {
+        // return (
+        //     <ErrorAlert>
+        //         <p>No event found!</p>
+        //     </ErrorAlert>
+        // )
         return (
-            <ErrorAlert>
-                <p>No event found!</p>
-            </ErrorAlert>
+            <div className='center'>
+                <p>Loading...</p>
+            </div>
         )
     };
 
@@ -50,7 +56,8 @@ export async function getStaticProps(context) {
     return {
         props: {
             selectedEvent : event
-        }
+        }, 
+        revalidate: 30
     }
 }
 
@@ -61,7 +68,8 @@ export async function getStaticPaths() {
 
     return {
         paths: paths,
-        fallback: true
+        // fallback: true // this is to tell next.js there might be some events prerender required even if it's not explicted in the paths.
+        fallback: 'blocking'
     };
 }
 
