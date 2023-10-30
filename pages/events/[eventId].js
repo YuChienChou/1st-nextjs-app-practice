@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
-import { getEventById, getAllEvents } from '../../components/helpers/api-util';
+import { getEventById, getFeaturedEvents} from '../../components/helpers/api-util';
 
 import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
@@ -55,13 +55,13 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-    const events = await getAllEvents();
+    const events = await getFeaturedEvents();
 
     const paths = events.map((event) => ({ params: { eventId: event.id}}));
 
     return {
         paths: paths,
-        fallback: false
+        fallback: true
     };
 }
 
