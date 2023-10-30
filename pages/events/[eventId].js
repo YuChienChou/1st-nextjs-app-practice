@@ -69,7 +69,7 @@ export async function getStaticPaths() {
     return {
         paths: paths,
         // fallback: true // this is to tell next.js there might be some events prerender required even if it's not explicted in the paths.
-        fallback: 'blocking'
+        fallback: 'blocking' //tell next.js to wait till the data is loaded
     };
 }
 
