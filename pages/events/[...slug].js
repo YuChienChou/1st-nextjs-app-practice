@@ -16,11 +16,12 @@ function FilteredEventsPage(props) {
     //the below code is required for client side data fetching
 
     const filteredData = router.query.slug;
-    console.log('filteredData in slug page: ', filteredData);
+    // console.log('filteredData in slug page: ', filteredData);
 
     const { data, error } = useSWR('https://udemy-nextjs-prerender-default-rtdb.firebaseio.com/Events.json', (url) => fetch(url).then(res => res.json())); //don't forget to asign the 2nd parameter in useSWR function.
 
-    console.log('data in slug page: ', data);
+    // console.log('data in slug page: ', data);
+
 
     useEffect(() => {
 
@@ -40,12 +41,23 @@ function FilteredEventsPage(props) {
         }
     }, [data]);
 
-    console.log("loadedEvents in slug page: ", loadedEvents);
+     let PageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta name='description' content={`A list of filtered events.`} />
+        </Head>
+    )
+
+    // console.log("loadedEvents in slug page: ", loadedEvents);
 
 
     if(!loadedEvents) {
             return (
+                <>
+                {PageHeadData}
                 <p className='center'>Loading...</p>
+                </>
+                
             )
     }
     
@@ -54,6 +66,14 @@ function FilteredEventsPage(props) {
     
     const numYear = +filteredYear;
     const numMonth = +filteredMonth;
+
+    PageHeadData = (
+        <Head>
+            <title>Filtered Events</title>
+            <meta name='description' content={`All events for ${numMonth}/${numYear}`}/>
+        </Head>
+    )
+
 
     if(
         isNaN(numYear) ||
@@ -66,6 +86,7 @@ function FilteredEventsPage(props) {
     ) {
         return (
             <>
+            {PageHeadData}
             <ErrorAlert><p>Invalid filter. Please adjust your values!</p></ErrorAlert>
             <div className='center'>
                 <Button link='/events'>Show All Events</Button>
@@ -93,6 +114,7 @@ function FilteredEventsPage(props) {
     if(!filteredEvents || filteredEvents.length === 0) {
         return (
             <>
+            {PageHeadData}
             <ErrorAlert><p>No events found for the chosen filter!</p></ErrorAlert>
             <div className='center'>
                 <Button link='/events'>Show All Events</Button>
@@ -105,10 +127,7 @@ function FilteredEventsPage(props) {
 
     return (
         <>
-        <Head>
-            <title>Filtered Events</title>
-            <meta name='description' content={`All events for ${numMonth}/${numYear}`}/>
-        </Head>
+        {PageHeadData}
         <ResultsTitle date={date} />
         <EventList items={filteredEvents} />
         </>
